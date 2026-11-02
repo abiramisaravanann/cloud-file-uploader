@@ -1,13 +1,47 @@
+# OS
 .DS_Store
+
+# Frontend
 node_modules/
 dist/
+frontend/dist/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables — NEVER commit
 .env
 .env.local
+frontend/.env
+backend/.env
+
+# GCP service account keys — NEVER commit
+*.json.key
+*-service-account*.json
+*-key.json
+service-account*.json
+credentials*.json
+# Specific original author key (retained for safety)
+backend/diya-file-uploader-key.json
+
+# IDE
 .vscode/
 .idea/
+*.swp
+
+# Logs
 *.log
-# Explicitly ignore GCP service key
-backend/diya-file-uploader-key.json
-*.json
+
+# Local GCS emulator data — never commit
+backend/cloudstorage/
+cloudstorage/
+
+# Temporary files
+*.tmp
+*.bak

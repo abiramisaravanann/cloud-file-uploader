@@ -2,7 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.json
+# GCP service account keys — NEVER commit
+*-key.json
+*-service-account*.json
+service-account*.json
+credentials*.json
+
 # C extensions
 *.so
 
