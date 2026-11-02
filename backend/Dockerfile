@@ -5,16 +5,15 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ✅ Copy entire backend (including your key file)
-COPY . .
+# Copy app source only — never copy .env or credential JSON files
+COPY app.py .
 
-# ✅ Set Google credentials path
-#ENV GOOGLE_APPLICATION_CREDENTIALS="/app/diya-file-uploader-key.json"
-
-# (Optional but harmless)
 ENV FLASK_APP=app.py
+# PORT defaults to 8080 for Cloud Run; override with --env PORT=xxxx locally
+ENV PORT=8080
 
 EXPOSE 8080
 
-# ✅ Gunicorn runs Flask app on Cloud Run’s expected port
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--timeout", "120", "app:app"]
+# Use Gunicorn for production (Cloud Run)
+# Credentials come from the attached Cloud Run service account at runtime
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--timeout", "120", "--workers", "2", "app:app"]
